@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- Importera knockout -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"
+      integrity="sha512-vs7+jbztHoMto5Yd/yinM4/y2DOkPLt0fATcN+j+G4ANY2z4faIzZIOMkpBmWdcxt+596FemCh9M18NUJTZwvw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <!-- Importera stilmall -->
+    <link rel="stylesheet" href="stats.css" />
+  </head>
+  <body>
+    <div id="main">
+      <!-- Bild över planen -->
+      <img
+        src="floorball.png"
+        style="width: 100%"
+        data-bind="click: placeMarker"
+      />
+
+      <!-- Placera ut alla skott -->
+      <!-- ko foreach: markers -->
+      <div
+        data-bind="style:{ 'left': x, 'top': y, 'background-color':  color(), 'width': size, 'height': size }"
+        style="position: absolute"
+      ></div>
+      <!-- /ko -->
+
+      <!-- Placera ut knapparna som styr skotten -->
+      <!-- ko foreach: buttons -->
+      <div class="ui-btn">
+        <span class="ui-btn-inner">
+          <span class="ui-btn-text" data-bind="{text: buttonText()}"></span>
+        </span>
+        <button
+          class="ui-btn-hidden"
+          data-bind="click: $root.updateMarker, style:{ 'background-color': color}"
+        ></button>
+      </div>
+      <!-- /ko -->
+
+      <!-- Placera ut knapp för att ta bort sista skottet -->
+      <div class="ui-btn">
+        <span class="ui-btn-inner">
+          <span class="ui-btn-text">Radera sista</span>
+        </span>
+        <button
+          id="remove"
+          class="ui-btn-hidden"
+          data-bind="click: removeMarker"
+        ></button>
+      </div>
+    </div>
+    <!-- Importera knockout viewmodel -->
+    <script src="stats.js"></script>
+  </body>
+</html>
